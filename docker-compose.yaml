@@ -1,29 +1,19 @@
-version: "3.3"
+version: "3.7"
 
 services:
   traefik:
     image: "traefik:v2.9"
     container_name: "traefik"
+    depends_on:
+      - "pocketbase"
     restart: "unless-stopped"
-    command:
-      #- "--log.level=DEBUG"
-      - "--api.insecure=true"
-      - "--providers.docker=true"
-      - "--providers.docker.exposedbydefault=false"
-      - "--providers.file.filename=/config/traefik-dynamic.yml"
-      - "--providers.file.watch=true"
-      - "--entrypoints.web.address=:80"
-      - "--entrypoints.websecure.address=:443"
-      - "--certificatesresolvers.le.acme.httpchallenge.entrypoint=web"
-      - "--certificatesresolvers.le.acme.email=fennessyeoin@gmail.com"
-      - "--certificatesresolvers.le.acme.storage=/acme.json"
     ports:
       - "80:80"
       - "443:443"
       - "8080:8080"
     volumes:
-      - "/var/run/docker.sock:/var/run/docker.sock:ro"
-      - "./reverse-proxy/traefik-dynamic.yml:/config/traefik-dynamic.yml"
+      - "./reverse-proxy/traefik.yaml:/traefik.yaml"
+      - "./reverse-proxy/traefik_dynamic.yaml:/traefik_dynamic.yaml"
       - "./reverse-proxy/acme.json:/acme.json"
 
   pocketbase:

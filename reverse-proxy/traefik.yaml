@@ -1,0 +1,25 @@
+entryPoints:
+  web:
+    address: ":80"
+    # redirections:
+    #   entryPoint:
+    #     to: "websecure"
+    #     scheme: "https"
+  websecure:
+    address: ":443"
+
+# Traefik web dashboard
+api:
+  insecure: true
+
+certificatesResolvers:
+  lets-encrypt:
+    acme:
+      email: "fennessyeoin@gmail.com"
+      storage: "acme.json"
+      tlsChallenge: {}
+  
+providers:
+  file:
+    filename: "traefik_dynamic.yaml"
+    watch: true

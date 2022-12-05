@@ -1,0 +1,15 @@
+http:
+  routers:
+    pocketbase:
+      entryPoints:
+        - websecure
+      rule: Host(`clever-cat-pb.eoinfennessy.com`)
+      service: pocketbase
+      tls:
+        certResolver: lets-encrypt
+
+  services:
+    pocketbase:
+      loadBalancer:
+        servers:
+          - url: http://pocketbase:8000
