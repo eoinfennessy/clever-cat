@@ -6,6 +6,7 @@ services:
     container_name: "traefik"
     depends_on:
       - "pocketbase"
+      - "web-app"
     restart: "unless-stopped"
     ports:
       - "80:80"
@@ -24,3 +25,10 @@ services:
       - "8000:8000"
     volumes:
       - "./backend/pb-data:/pb/pb_data"
+
+  web-app:
+    image: "web-app:v1"
+    container_name: "web-app"
+    restart: "unless-stopped"
+    ports:
+      - "3000:3000"

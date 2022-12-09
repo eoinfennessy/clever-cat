@@ -7,9 +7,20 @@ http:
       service: pocketbase
       tls:
         certResolver: lets-encrypt
+    web-app:
+      entryPoints:
+        - websecure
+      rule: Host(`clever-cat.eoinfennessy.com`)
+      service: web-app
+      tls:
+        certResolver: lets-encrypt
 
   services:
     pocketbase:
       loadBalancer:
         servers:
           - url: http://pocketbase:8000
+    web-app:
+      loadBalancer:
+        servers:
+          - url: http://web-app:3000
