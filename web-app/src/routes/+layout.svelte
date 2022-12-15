@@ -12,7 +12,7 @@
 <div class="min-h-full">
   <nav class="navbar bg-base-100 border-b">
     <div class="flex-1">
-      <a href="/" class="button btn-ghost normal-case text-xl">Sveltekit Demo</a>
+      <a href="/" class="button btn-ghost normal-case text-xl">Clever Cat</a>
     </div>
     <div class="flex-none">
       {#if !data.user}
@@ -22,7 +22,7 @@
         </div>
       {:else}
         <div class="dropdown dropdown-end mr-4">
-          <a href="/projects/new" class="btn btn-primary btn-outline">Add Project</a>
+          <a href="/my/feeders" class="btn btn-primary btn-outline">My Feeders</a>
         </div>
         <div class="dropdown dropdown-end">
           <!-- svelte-ignore a11y-no-noninteractive-tabindex -->
@@ -37,9 +37,6 @@
             tabindex="0"
             class="menu menu-compact dropdown-content mt-3 p2 shadow bg-base-100 rounded-box w-52"
           >
-            <li>
-              <a href="/my/projects" class="justify-between">My Projects</a>
-            </li>
             <li>
               <a href="/my/settings">Settings</a>
             </li>

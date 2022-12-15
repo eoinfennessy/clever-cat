@@ -16,9 +16,11 @@ export const actions = {
     }
 
     body.append('user', locals.user.id)
+    // Default Model
+    body.append('model', '7hyusgq7gp56ltp')
 
     try {
-      await locals.pb.collection("projects").create(body);
+      await locals.pb.collection("feeders").create(body);
     } catch (err) {
       console.log("Error: ", err);
       throw error(err.status, err.message);

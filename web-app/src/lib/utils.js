@@ -10,5 +10,5 @@ export const generateUsername = (name) => {
 }
 
 export const getImageUrl = (collectionId, recordId, filename, size = '0x0') => {
-    return `http://localhost:8090/api/files/${collectionId}/${recordId}/${filename}?thumb=${size}`;
+    return `https://clever-cat-pb.eoinfennessy.com/api/files/${collectionId}/${recordId}/${filename}?thumb=${size}`;
 }
