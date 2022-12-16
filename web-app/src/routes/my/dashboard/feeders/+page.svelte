@@ -10,7 +10,7 @@
       <h2 class="card-title">{feeder.name}</h2>
       <p>{feeder.description}</p>
       <div class="card-actions justify-end">
-        <a href="/my/feeders/{feeder.id}">
+        <a href="/my/dashboard/feeders/{feeder.id}">
           <button class="btn btn-primary">View Feeder</button>
         </a>
       </div>
@@ -19,7 +19,7 @@
 {/each}
 
 <div class="mt-10">
-  <a href="/my/feeders/new">
+  <a href="/my/dashboard/feeders/new">
     <button class="btn btn-secondary btn-wide gap-2">
       Add a New Feeder
       <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="white" viewBox="0 0 52 52" stroke="currentColor">

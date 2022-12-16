@@ -12,7 +12,7 @@
 <div class="min-h-full">
   <nav class="navbar bg-base-100 border-b">
     <div class="flex-1">
-      <a href="/" class="button btn-ghost normal-case text-xl">Clever Cat</a>
+      <a href="/" class="button btn-ghost normal-case text-xl">😸 Clever Cat</a>
     </div>
     <div class="flex-none">
       {#if !data.user}
@@ -22,7 +22,7 @@
         </div>
       {:else}
         <div class="dropdown dropdown-end mr-4">
-          <a href="/my/feeders" class="btn btn-primary btn-outline">My Feeders</a>
+          <a href="/my/dashboard/feeders" class="btn btn-primary btn-outline">My Feeders</a>
         </div>
         <div class="dropdown dropdown-end">
           <!-- svelte-ignore a11y-no-noninteractive-tabindex -->

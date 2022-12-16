@@ -2,9 +2,9 @@ import { serialiseNonPojos } from '$lib/utils'
 import { error } from '@sveltejs/kit'
 
 export const load = ({ locals, params }) => {
-    const getProject = async (feederId) => {
+    const getPet = async (petId) => {
         try {
-            const feeder = serialiseNonPojos(await locals.pb.collection('feeders').getOne(feederId, {expand: 'model'}))
+            const feeder = serialiseNonPojos(await locals.pb.collection('pets').getOne(petId))
             console.log(feeder)
             return feeder
         } catch (err) {
@@ -13,6 +13,6 @@ export const load = ({ locals, params }) => {
         }
     }
     return {
-        feeder: getProject(params.feederId)
+        pet: getPet(params.petId)
     }
 }

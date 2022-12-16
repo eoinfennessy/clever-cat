@@ -25,7 +25,7 @@
         <label for="thumbnail" class="label font-medium pb-1">
             <span class="label-text">Thumbnail</span>
         </label>
-        <input type="file" name="thumbnail" id="thumbnail" accept="image/*" class="file-input file-input-bordered w-full max-w-lg" />
+        <input type="file" name="thumbnail" id="thumbnail" accept="image/*" class="file-input file-input-bordered file-input-secondary w-full max-w-lg" />
       </div>
       <div class="w-full max-w-lg pt-3">
         <button type="submit" class="btn btn-primary w-full max-w-lg">Create Feeder</button>
