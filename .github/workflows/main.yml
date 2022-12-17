@@ -31,5 +31,5 @@ jobs:
         run: ssh prod 'cd clever-cat && git pull'
       
       - name: deploy
-        run: ssh prod 'docker compose down && docker compose up -d'
+        run: ssh prod 'cd clever-cat && docker compose down && docker compose up -d'
           
