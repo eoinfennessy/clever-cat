@@ -17,7 +17,7 @@ jobs:
           SSH_HOST: ${{ secrets.PROD_SSH_HOST }}
         run: |
           mkdir -p ~/.ssh/
-          echo $SSH_KEY > ~/.ssh/work_macbook
+          echo "$SSH_KEY" > ~/.ssh/work_macbook
           chmod 600 ~/.ssh/work_macbook
           cat >>~/.ssh/config <<END
             Host prod
