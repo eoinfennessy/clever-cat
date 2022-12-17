@@ -17,13 +17,13 @@ jobs:
           SSH_HOST: ${{ secrets.PROD_SSH_HOST }}
         run: |
           mkdir -p ~/.ssh/
-          echo "$SSH_KEY" > ~/.ssh/work_macbook
-          chmod 600 ~/.ssh/work_macbook
+          echo "$SSH_KEY" > ~/.ssh/prod_key
+          chmod 600 ~/.ssh/prod_key
           cat >>~/.ssh/config <<END
             Host prod
               HostName $SSH_HOST
               User $SSH_USER
-              IdentityFile ~/.ssh/work_macbook
+              IdentityFile ~/.ssh/prod_key
               StrictHostKeyChecking no
           END
           
