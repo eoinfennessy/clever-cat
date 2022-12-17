@@ -18,7 +18,10 @@ services:
       - "./reverse-proxy/acme.json:/acme.json"
 
   pocketbase:
-    image: "pocketbase:v1"
+    image: pocketbase
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
     container_name: "pocketbase"
     restart: "unless-stopped"
     ports:
@@ -27,7 +30,10 @@ services:
       - "./backend/pb-data:/pb/pb_data"
 
   web-app:
-    image: "web-app:v1"
+    image: "web-app"
+    build:
+      context: ./web-app
+      dockerfile: Dockerfile
     container_name: "web-app"
     restart: "unless-stopped"
     ports:
