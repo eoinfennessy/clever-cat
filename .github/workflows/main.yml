@@ -24,7 +24,7 @@ jobs:
               HostName $SSH_HOST
               User $SSH_USER
               IdentityFile ~/.ssh/work_macbook
-              StrictHostChecking no
+              StrictHostKeyChecking no
           END
           
       - name: pull_changes
