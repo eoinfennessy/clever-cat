@@ -29,7 +29,10 @@ jobs:
           
       - name: pull_changes
         run: ssh prod 'cd clever-cat && git pull'
+
+      - name: build
+        run: ssh prod 'cd clever-cat && docker compose build'
       
       - name: deploy
-        run: ssh prod 'cd clever-cat && docker compose down && docker compose up -d'
+        run: ssh prod 'cd clever-cat && docker compose up -d'
           
