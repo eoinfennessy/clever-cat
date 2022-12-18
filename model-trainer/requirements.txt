@@ -1,0 +1,5 @@
+httpx>=0.23.0
+fastapi==0.88.0
+uvicorn==0.20.0
+python-dotenv==0.21.0
+tflite-model-maker==0.4.2
