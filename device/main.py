@@ -2,6 +2,10 @@ from dotenv import load_dotenv
 import httpx
 import os
 from pocketbase import PocketBase
+from camera import Camera
+from dispenser import Dispenser
+from feed_scheduler import FeedScheduler
+from pet_detector import PetDetector
 
 
 def update_feeder_config():
@@ -30,13 +34,45 @@ def setup():
         with open(f'./models/{model_record.model}', 'wb') as model:
             model.write(res.content)
 
-    # Initialise cat_cam
+    # Get detection labels - use generic 'cat' label if model's user is the default user
+    if model_record.user == os.getenv('DEFAULT_USER_ID'):
+        detection_labels = ['cat']
+    else:
+        detection_labels = model_record.pets
+
+    # Initialise pet detector
+    pet_detector = PetDetector(
+        f'./models/{model_record.model}',
+        detection_labels,
+        confidence_threshold=0.5,
+        max_results=1)
+
+    # Initialise camera after making images directory
+    if not os.path.exists('./images'):
+        os.mkdir('./images')
+    camera = Camera(camera_id=0, save_image_dir='./images')
 
     # Get feed schedules matching feeder ID
-    # Get last dispensed feeds matching pets in feed scheduler and feeder ID
-    # Initialise feed_scheduler
+    feed_schedules = pb.collection('feed_schedules').get_full_list(1000, {'filter': f'feeder = "{os.getenv("FEEDER_ID")}"'})
+
+    # Initialise feed schedulers after getting last dispensed feeds matching feeder ID and pets in feed schedules
+    feed_schedulers = {}
+    for feed_schedule in feed_schedules:
+        last_feed = pb.collection('feeds').get_list(
+            1, 1,
+            {'filter': f'feeder = "{os.getenv("FEEDER_ID")}" && pet = "{feed_schedule.pet}"',
+            'sort': '-created'})
+        print(feed_schedule.pet, type(feed_schedule.pet))
+        pet = pb.collection('pets').get_one(feed_schedule.pet)
+        if pet.user == os.getenv('DEFAULT_USER_ID'):
+            pet_key = 'cat'
+        else:
+            pet_key = feed_schedule.pet
+        feed_schedulers[pet_key] = FeedScheduler(
+            feed_schedule.amount_grams, feed_schedule.frequency_hours, last_feed[0].created)
 
     # Initialise dispenser
+    dispenser = Dispenser(servo_pin=25, grams_per_second=3)
 
     # Set up subscription to feeder config using update_feeder_config callback
     # Set up subscription to feed_scheduler using update_feed_scheduler_config callback

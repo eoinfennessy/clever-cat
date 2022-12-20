@@ -2,3 +2,5 @@ acme.json
 pb-data/
 .env
 env/
+**/__pycache__/
+*.pyc

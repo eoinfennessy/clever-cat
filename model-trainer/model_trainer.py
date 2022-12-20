@@ -19,7 +19,7 @@ pb.admins.auth_with_password(
     os.getenv('POCKETBASE_ADMIN_EMAIL'), os.getenv('POCKETBASE_ADMIN_PASSWORD')
     )
 
-model_specification = model_spec.get('efficientdet_lite0')
+model_specification = model_spec.get('efficientdet_lite1')
 
 def create_data_dir() -> str:
     working_dir = str(uuid.uuid4())
