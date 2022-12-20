@@ -8,10 +8,10 @@ from feed_scheduler import FeedScheduler
 from pet_detector import PetDetector
 
 
-def update_feeder_config():
+def update_feeder_config(event):
     pass
 
-def update_feed_schduler_config():
+def update_feed_scheduler_config(event):
     pass
 
 def setup():
@@ -75,8 +75,10 @@ def setup():
     dispenser = Dispenser(servo_pin=25, grams_per_second=3)
 
     # Set up subscription to feeder config using update_feeder_config callback
+    pb.collection('feeders').subscribe(update_feeder_config)
+
     # Set up subscription to feed_scheduler using update_feed_scheduler_config callback
-    pass
+    pb.collection('feed_schedules').subscribe(update_feed_scheduler_config)
 
 def main():
     # detections: list[dict[str, str | float]] = cat_cam.detect()
