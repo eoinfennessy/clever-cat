@@ -1,5 +1,6 @@
 import cv2
 import numpy as np
+import io
 
 
 class Camera:
@@ -13,8 +14,15 @@ class Camera:
         return frame
 
 
-    def save_image(self, frame, image_name):
+    def save_image(self, frame: np.ndarray, image_name: str):
         cv2.imwrite(f'{self.image_dir}/{image_name}', frame)
+
+
+    @staticmethod
+    def image_array_to_binary(image: np.ndarray, format: str = '.jpg') -> bytes:
+        _, buffer = cv2.imencode('.jpg', image)
+        io_buf = io.BytesIO(buffer)
+        return io_buf.read()
 
 
 if __name__ == '__main__':
