@@ -4,7 +4,7 @@ import time
 
 class Dispenser:
     def __init__(self, servo_pin: int, grams_per_second: float = 5) -> None:
-        self.servo = Servo(servo_pin)
+        self.servo = Servo(servo_pin, initial_value=-1)
         self.grams_per_second = grams_per_second
         pass
 
