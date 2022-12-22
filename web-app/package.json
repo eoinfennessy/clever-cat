@@ -23,6 +23,7 @@
   },
   "type": "module",
   "dependencies": {
+    "eventsource": "^2.0.2",
     "pocketbase": "^0.9.0"
   }
 }

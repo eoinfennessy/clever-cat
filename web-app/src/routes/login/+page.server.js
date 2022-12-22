@@ -17,6 +17,6 @@ export const actions = {
       throw error(500, "Something went wrong when logging in");
     }
 
-    throw redirect(303, '/my/feeders');
+    throw redirect(303, '/my/dashboard/feeders');
   }
 };

@@ -8,8 +8,7 @@ export const load = ({ locals, params }) => {
     
     const getPhotos = async (pageNumber) => {
         try {
-            const photos = serialiseNonPojos(await locals.pb.collection('pet_photos').getList(pageNumber, 3, {filter: `user = "${locals.user.id}"`, sort: '-created'}));
-            console.log(photos)
+            const photos = serialiseNonPojos(await locals.pb.collection('pet_photos').getList(pageNumber, 3, {filter: `user = "${locals.user.id}"`, sort: '-created', expand: 'pet'}));
             return photos
         } catch (err) {
             console.log('Error: ', err);
@@ -18,6 +17,7 @@ export const load = ({ locals, params }) => {
     }
 
     return {
+        pb_cookie: locals.pb.authStore.exportToCookie({ httpOnly: false }),
         photos: getPhotos(params.pageNumber)
     }
 }
