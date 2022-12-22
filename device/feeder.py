@@ -31,10 +31,7 @@ class Feeder:
 
         self.set_feeder_record(self.pb.collection('feeders').get_one(feeder_id))
 
-        self.set_model_record(
-            self.pb.collection('models').get_one(self.feeder_record.model)
-        )
-        self.download_model_if_not_exists()
+        self.update_model_record()
 
         self.update_pet_detector()
 
@@ -51,6 +48,13 @@ class Feeder:
 
     def set_feeder_record(self, feeder_record: Record) -> None:
         self.feeder_record = feeder_record
+
+
+    def update_model_record(self):
+        self.set_model_record(
+            self.pb.collection('models').get_one(self.feeder_record.model)
+        )
+        self.download_model_if_not_exists()
 
     
     def set_model_record(self, model_record: Record) -> None:
@@ -76,22 +80,25 @@ class Feeder:
             max_results=1)
 
 
+    def create_feed_scheduler(self, feed_schedule: Record) -> FeedScheduler:
+        last_feed = self.pb.collection('feeds').get_list(
+            1, 1,
+            {'filter': f'feeder = "{self.feeder_record.id}" && pet = "{feed_schedule.pet}"',
+            'sort': '-created'}
+        )
+        if last_feed.items:
+            last_feed_time = last_feed.items[0].created
+        else:
+            last_feed_time = datetime.datetime(1970, 1, 1, 0, 0)
+        return FeedScheduler(
+            feed_schedule.amount_grams, feed_schedule.frequency_hours, last_feed_time
+        )
+
+
     def set_feed_schedulers(self, feed_schedules):
         schedulers = {}
         for feed_schedule in feed_schedules:
-            last_feed = self.pb.collection('feeds').get_list(
-                1, 1,
-                {'filter': f'feeder = "{self.feeder_record.id}" && pet = "{feed_schedule.pet}"',
-                'sort': '-created'}
-            )
-            if last_feed.items:
-                last_feed_time = last_feed.items[0].created
-            else:
-                last_feed_time = datetime.datetime(1970, 1, 1, 0, 0)
-
-            schedulers[feed_schedule.pet] = FeedScheduler(
-                feed_schedule.amount_grams, feed_schedule.frequency_hours, last_feed_time
-            )
+            schedulers[feed_schedule.pet] = self.create_feed_scheduler(feed_schedule)
         self.feed_schedulers = schedulers
 
 
@@ -106,11 +113,16 @@ class Feeder:
 
     
     def handle_feeders_events(self, event):
-        pass
+        if event.action == 'update' and event.record.model != self.model_record.id:
+            self.set_feeder_record(event.record)
+            self.update_model_record()
 
 
     def handle_feed_schedules_events(self, event):
-        pass
+        if event.action in ('create', 'update'):
+            self.feed_schedulers[event.record.pet] = self.create_feed_scheduler(event.record)
+        elif event.action == 'delete':
+            self.feed_schedulers.pop(event.record.pet)
 
 
     def update(self):
