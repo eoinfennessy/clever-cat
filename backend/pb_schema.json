@@ -1,0 +1,494 @@
+[
+  {
+    "id": "_pb_users_auth_",
+    "name": "users",
+    "type": "auth",
+    "system": false,
+    "schema": [
+      {
+        "id": "users_name",
+        "name": "name",
+        "type": "text",
+        "system": false,
+        "required": false,
+        "unique": false,
+        "options": {
+          "min": null,
+          "max": null,
+          "pattern": ""
+        }
+      },
+      {
+        "id": "users_avatar",
+        "name": "avatar",
+        "type": "file",
+        "system": false,
+        "required": false,
+        "unique": false,
+        "options": {
+          "maxSelect": 1,
+          "maxSize": 5242880,
+          "mimeTypes": [
+            "image/jpg",
+            "image/jpeg",
+            "image/png",
+            "image/svg+xml",
+            "image/gif"
+          ],
+          "thumbs": null
+        }
+      }
+    ],
+    "listRule": "id = @request.auth.id",
+    "viewRule": "id = @request.auth.id",
+    "createRule": "",
+    "updateRule": "id = @request.auth.id",
+    "deleteRule": "id = @request.auth.id",
+    "options": {
+      "allowEmailAuth": true,
+      "allowOAuth2Auth": true,
+      "allowUsernameAuth": true,
+      "exceptEmailDomains": null,
+      "manageRule": null,
+      "minPasswordLength": 8,
+      "onlyEmailDomains": null,
+      "requireEmail": false
+    }
+  },
+  {
+    "id": "49j80iv53sqs8hk",
+    "name": "feeders",
+    "type": "base",
+    "system": false,
+    "schema": [
+      {
+        "id": "rxmcvirz",
+        "name": "user",
+        "type": "relation",
+        "system": false,
+        "required": false,
+        "unique": false,
+        "options": {
+          "maxSelect": 1,
+          "collectionId": "_pb_users_auth_",
+          "cascadeDelete": true
+        }
+      },
+      {
+        "id": "lqh4ycdq",
+        "name": "model",
+        "type": "relation",
+        "system": false,
+        "required": true,
+        "unique": false,
+        "options": {
+          "maxSelect": 1,
+          "collectionId": "pej7fx017b47i44",
+          "cascadeDelete": false
+        }
+      },
+      {
+        "id": "qbkukfdc",
+        "name": "name",
+        "type": "text",
+        "system": false,
+        "required": false,
+        "unique": false,
+        "options": {
+          "min": null,
+          "max": 15,
+          "pattern": ""
+        }
+      },
+      {
+        "id": "e0cq7i0m",
+        "name": "description",
+        "type": "text",
+        "system": false,
+        "required": false,
+        "unique": false,
+        "options": {
+          "min": null,
+          "max": 255,
+          "pattern": ""
+        }
+      },
+      {
+        "id": "yq8bgywm",
+        "name": "thumbnail",
+        "type": "file",
+        "system": false,
+        "required": false,
+        "unique": false,
+        "options": {
+          "maxSelect": 1,
+          "maxSize": 5242880,
+          "mimeTypes": [
+            "image/jpg",
+            "image/jpeg",
+            "image/png",
+            "image/svg+xml",
+            "image/gif"
+          ],
+          "thumbs": [
+            "300x300"
+          ]
+        }
+      },
+      {
+        "id": "jlxhxtrl",
+        "name": "is_registered",
+        "type": "bool",
+        "system": false,
+        "required": false,
+        "unique": false,
+        "options": {}
+      }
+    ],
+    "listRule": "user = @request.auth.id",
+    "viewRule": "user = @request.auth.id",
+    "createRule": "@request.auth.id != \"\"",
+    "updateRule": "user = @request.auth.id",
+    "deleteRule": "user = @request.auth.id",
+    "options": {}
+  },
+  {
+    "id": "pej7fx017b47i44",
+    "name": "models",
+    "type": "base",
+    "system": false,
+    "schema": [
+      {
+        "id": "er8k1eyi",
+        "name": "user",
+        "type": "relation",
+        "system": false,
+        "required": false,
+        "unique": false,
+        "options": {
+          "maxSelect": 1,
+          "collectionId": "_pb_users_auth_",
+          "cascadeDelete": true
+        }
+      },
+      {
+        "id": "bnr8pgu9",
+        "name": "pets",
+        "type": "relation",
+        "system": false,
+        "required": true,
+        "unique": false,
+        "options": {
+          "maxSelect": null,
+          "collectionId": "au0pxknnmmg4qfm",
+          "cascadeDelete": false
+        }
+      },
+      {
+        "id": "nhq3f2pi",
+        "name": "model",
+        "type": "file",
+        "system": false,
+        "required": true,
+        "unique": false,
+        "options": {
+          "maxSelect": 1,
+          "maxSize": 52428800,
+          "mimeTypes": [],
+          "thumbs": []
+        }
+      }
+    ],
+    "listRule": "user = @request.auth.id || user = \"sw4nq00p05a9f5u\"",
+    "viewRule": "user = @request.auth.id || user = \"sw4nq00p05a9f5u\"",
+    "createRule": null,
+    "updateRule": null,
+    "deleteRule": null,
+    "options": {}
+  },
+  {
+    "id": "au0pxknnmmg4qfm",
+    "name": "pets",
+    "type": "base",
+    "system": false,
+    "schema": [
+      {
+        "id": "qvbnjl5j",
+        "name": "user",
+        "type": "relation",
+        "system": false,
+        "required": false,
+        "unique": false,
+        "options": {
+          "maxSelect": 1,
+          "collectionId": "_pb_users_auth_",
+          "cascadeDelete": false
+        }
+      },
+      {
+        "id": "sypbq4xp",
+        "name": "name",
+        "type": "text",
+        "system": false,
+        "required": false,
+        "unique": false,
+        "options": {
+          "min": null,
+          "max": 15,
+          "pattern": ""
+        }
+      },
+      {
+        "id": "nglrb72x",
+        "name": "avatar",
+        "type": "file",
+        "system": false,
+        "required": false,
+        "unique": false,
+        "options": {
+          "maxSelect": 1,
+          "maxSize": 5242880,
+          "mimeTypes": [
+            "image/jpg",
+            "image/jpeg",
+            "image/png",
+            "image/svg+xml",
+            "image/gif"
+          ],
+          "thumbs": [
+            "256x256"
+          ]
+        }
+      }
+    ],
+    "listRule": "user = @request.auth.id || user = \"sw4nq00p05a9f5u\"",
+    "viewRule": "user = @request.auth.id || user = \"sw4nq00p05a9f5u\"",
+    "createRule": "@request.auth.id != \"\"",
+    "updateRule": "user = @request.auth.id",
+    "deleteRule": "user = @request.auth.id",
+    "options": {}
+  },
+  {
+    "id": "hd78ajnie5cddcv",
+    "name": "pet_photos",
+    "type": "base",
+    "system": false,
+    "schema": [
+      {
+        "id": "mkzt1ppe",
+        "name": "user",
+        "type": "relation",
+        "system": false,
+        "required": true,
+        "unique": false,
+        "options": {
+          "maxSelect": 1,
+          "collectionId": "_pb_users_auth_",
+          "cascadeDelete": true
+        }
+      },
+      {
+        "id": "ighrra05",
+        "name": "photo",
+        "type": "file",
+        "system": false,
+        "required": true,
+        "unique": false,
+        "options": {
+          "maxSelect": 1,
+          "maxSize": 52428800,
+          "mimeTypes": [
+            "image/jpg",
+            "image/jpeg",
+            "image/png",
+            "image/svg+xml",
+            "image/gif"
+          ],
+          "thumbs": []
+        }
+      },
+      {
+        "id": "cgvp2shz",
+        "name": "feeder",
+        "type": "relation",
+        "system": false,
+        "required": true,
+        "unique": false,
+        "options": {
+          "maxSelect": 1,
+          "collectionId": "49j80iv53sqs8hk",
+          "cascadeDelete": false
+        }
+      },
+      {
+        "id": "0kun5nss",
+        "name": "pet",
+        "type": "relation",
+        "system": false,
+        "required": true,
+        "unique": false,
+        "options": {
+          "maxSelect": 1,
+          "collectionId": "au0pxknnmmg4qfm",
+          "cascadeDelete": true
+        }
+      },
+      {
+        "id": "blsnofpd",
+        "name": "confidence",
+        "type": "number",
+        "system": false,
+        "required": true,
+        "unique": false,
+        "options": {
+          "min": 0,
+          "max": 1
+        }
+      },
+      {
+        "id": "yckgiv24",
+        "name": "bounding_box",
+        "type": "json",
+        "system": false,
+        "required": true,
+        "unique": false,
+        "options": {}
+      }
+    ],
+    "listRule": "user = @request.auth.id",
+    "viewRule": "user = @request.auth.id",
+    "createRule": "@request.auth.id != \"\"",
+    "updateRule": null,
+    "deleteRule": null,
+    "options": {}
+  },
+  {
+    "id": "nmzuz5shg7rti9d",
+    "name": "feed_schedules",
+    "type": "base",
+    "system": false,
+    "schema": [
+      {
+        "id": "mrkznpi8",
+        "name": "feeder",
+        "type": "relation",
+        "system": false,
+        "required": true,
+        "unique": false,
+        "options": {
+          "maxSelect": 1,
+          "collectionId": "49j80iv53sqs8hk",
+          "cascadeDelete": true
+        }
+      },
+      {
+        "id": "jne7yqwz",
+        "name": "pet",
+        "type": "relation",
+        "system": false,
+        "required": true,
+        "unique": false,
+        "options": {
+          "maxSelect": 1,
+          "collectionId": "au0pxknnmmg4qfm",
+          "cascadeDelete": true
+        }
+      },
+      {
+        "id": "rmvap4qs",
+        "name": "amount_grams",
+        "type": "number",
+        "system": false,
+        "required": true,
+        "unique": false,
+        "options": {
+          "min": 1,
+          "max": null
+        }
+      },
+      {
+        "id": "kgyjoomp",
+        "name": "frequency_hours",
+        "type": "number",
+        "system": false,
+        "required": true,
+        "unique": false,
+        "options": {
+          "min": 1,
+          "max": 24
+        }
+      }
+    ],
+    "listRule": "feeder.user.id = @request.auth.id",
+    "viewRule": "feeder.user.id = @request.auth.id",
+    "createRule": "@request.auth.id != \"\"",
+    "updateRule": "feeder.user.id = @request.auth.id",
+    "deleteRule": "feeder.user.id = @request.auth.id",
+    "options": {}
+  },
+  {
+    "id": "lwysl7pe6akzu2g",
+    "name": "feeds",
+    "type": "base",
+    "system": false,
+    "schema": [
+      {
+        "id": "y4dyrpzk",
+        "name": "feeder",
+        "type": "relation",
+        "system": false,
+        "required": false,
+        "unique": false,
+        "options": {
+          "maxSelect": 1,
+          "collectionId": "49j80iv53sqs8hk",
+          "cascadeDelete": true
+        }
+      },
+      {
+        "id": "7mnmyorz",
+        "name": "pet",
+        "type": "relation",
+        "system": false,
+        "required": true,
+        "unique": false,
+        "options": {
+          "maxSelect": 1,
+          "collectionId": "au0pxknnmmg4qfm",
+          "cascadeDelete": false
+        }
+      },
+      {
+        "id": "1eorgq0e",
+        "name": "photo",
+        "type": "relation",
+        "system": false,
+        "required": true,
+        "unique": false,
+        "options": {
+          "maxSelect": 1,
+          "collectionId": "hd78ajnie5cddcv",
+          "cascadeDelete": false
+        }
+      },
+      {
+        "id": "pdurlwii",
+        "name": "grams_dispensed",
+        "type": "number",
+        "system": false,
+        "required": true,
+        "unique": false,
+        "options": {
+          "min": 1,
+          "max": null
+        }
+      }
+    ],
+    "listRule": "feeder.user.id = @request.auth.id",
+    "viewRule": "feeder.user.id = @request.auth.id",
+    "createRule": "@request.auth.id != \"\"",
+    "updateRule": null,
+    "deleteRule": null,
+    "options": {}
+  }
+]
