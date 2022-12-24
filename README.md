@@ -107,3 +107,9 @@ python main.py &
 
 exit 0
 ```
+
+## Notes and Acknowledgements
+
+Thanks to [huntabyte](https://github.com/huntabyte) for the excellent SvelteKit tutorials that got me started with the web app.
+
+Note that the commited Pocketbase directory used on the device comes from [an rc branch on the Pocketbase Python SDK repo](https://github.com/vaphes/pocketbase/tree/0.8.0-rc2), and will be replaced with a pip dependency when a package is released for the latest PB version.
