@@ -4,6 +4,8 @@ A prototypical IoT device, that uses machine learning models to detect cats and 
 
 The device then sends back photos of the cat that can be seen updating on the web app in real time. The user could then tag these images with their cats name, and when enough of them are gathered a new machine learning model could be trained to differentiate between cats and allow the user to schedule different feeds for each.
 
+Here's a link to [a video demonstration of Clever Cat](https://youtu.be/kG52tjd7Qfw).
+
 ## Technologies Used
 
 ![./docs/clever-cat-system.png](./docs/clever-cat-system.png)
