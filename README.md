@@ -1,8 +1,8 @@
-# 😸 Clever Cat
+# Clever Cat 😸
 
-A prototypical IoT device, that uses machine learning models to detect cats and a servo motor-powered dispenser to dispense feed for them based on feed schedules defined by the cats' owner using a web app.
+A prototypical IoT device that uses machine learning models to detect cats and a servo motor-powered dispenser to dispense feed for them based on feed schedules defined by the cats' owner using a web app.
 
-The device then sends back photos of the cat that can be seen updating on the web app in real time. The user could then tag these images with their cats name, and when enough of them are gathered a new machine learning model could be trained to differentiate between cats and allow the user to schedule different feeds for each.
+When fed, the device uploads photos of the cat and feed details to a realtime database, which is subscribed to by the web app used by the owner giving them instant updates on feeds as well as pics of their cat. The owner could then tag these images with their cat's name, and when enough tagged photos are gathered an event would trigger a new machine learning model to be trained that differentiates between all the user's cats, allowing for an individual feed schedule to be assigned to each. The user can also remotely configure the feed schedules for each cat using the web app by publishing the schedule to a table in the realtime DB subscribed to by the device.
 
 Here's a link to [a video demonstration of Clever Cat](https://youtu.be/kG52tjd7Qfw).
 
@@ -20,6 +20,8 @@ The following parts were used to make the feeder device:
 - Breadboard, jumper cables and some buttons (for testing construction)
 
 The device runs a Python app that uses libraries including OpenCV, Tensorflow, Pocketbase, and GPIO Zero.
+
+![https://user-images.githubusercontent.com/85010533/213409942-c1cf1378-ef3a-4980-86d1-f9b9c8bc0d75.jpeg](https://user-images.githubusercontent.com/85010533/213409942-c1cf1378-ef3a-4980-86d1-f9b9c8bc0d75.jpeg)
 
 ### VM
 
